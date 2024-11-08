@@ -1,10 +1,12 @@
 function guardarYDescargar(event) {
     event.preventDefault();  // Prevenir el envío del formulario
 
-    // Obtén los valores del formulario
+    // Obtener los valores del formulario
     const usuario = document.getElementById("usuario").value;
     const cliente = document.getElementById("cliente").value;
     const trato = document.getElementById("trato").value;
+    const contacto = document.getElementById("contacto").value;
+    const email = document.getElementById("email").value;
     let comentario = document.getElementById("comentario").value;
 
     // Si el comentario está vacío, asigna el valor "Cerrado"
@@ -12,57 +14,42 @@ function guardarYDescargar(event) {
         comentario = "Proyecto cerrado correctamente. Sin pendientes";
     }
 
-    // Obtén los valores de los checkboxes seleccionados
+    // Obtener las opciones seleccionadas
+    const opcionesSeleccionadas = [];
     const checkboxes = document.querySelectorAll('input[name="opciones"]:checked');
-    const opcionesSeleccionadas = Array.from(checkboxes).map(checkbox => checkbox.value);
+    checkboxes.forEach(checkbox => {
+        opcionesSeleccionadas.push(checkbox.value);
+    });
 
-    // Verificar si se seleccionó "Transformación"
-    const opcionTransformacion = document.getElementById("opcion-transformacion").checked;
-    const subopcionesSeleccionadas = document.getElementById("subopciones") ? document.getElementById("subopciones").value : '';
+    // Verificar si se seleccionó "Captura mediante" y obtener subopciones
+    const opcionArchivos = document.getElementById("opcion-archivos").checked;
+    const capturasubSeleccionada = opcionArchivos ? document.getElementById("capturasub").value : "";
+    const frecuenciaSeleccionada = opcionArchivos ? document.getElementById("frecuencia").value : "";
 
-    // Validar si se seleccionó "Transformación" y si se eligió una subopción
-    if (opcionTransformacion && !subopcionesSeleccionadas) {
-        alert("Por favor, seleccione una versión para 'Transformación'");
-        return;
-    }
+    // Obtener la fecha actual
+    const fechaActual = new Date();
+    const fechaFormateada = fechaActual.toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    });
 
-    // Obtener la opción seleccionada en el grupo "Contiene API"
-    const apiSeleccionada = document.querySelector('input[name="api"]:checked') ? document.querySelector('input[name="api"]:checked').value : "";
-
-    // Obtener la opción seleccionada en el grupo "El proyecto es"
-    const proyectoSeleccionado = document.querySelector('input[name="proyecto"]:checked') ? document.querySelector('input[name="proyecto"]:checked').value : "";
-
-    // Guardar en localStorage (para persistencia temporal si es necesario)
-    localStorage.setItem("usuario", usuario);
-    localStorage.setItem("cliente", cliente);
-    localStorage.setItem("trato", trato);
-    localStorage.setItem("opcionesSeleccionadas", JSON.stringify(opcionesSeleccionadas));
-    if (apiSeleccionada) {
-        localStorage.setItem("apiSeleccionada", apiSeleccionada);
-    }
-    if (opcionTransformacion) {
-        localStorage.setItem("subopcion", subopcionesSeleccionadas);
-    }
-    if (proyectoSeleccionado) {
-        localStorage.setItem("proyectoSeleccionado", proyectoSeleccionado);
-    }
-    localStorage.setItem("comentario", comentario);
-
-    // Crear contenido del archivo de texto sin tabulaciones ni espacios extras
+    // Crear contenido del archivo de texto con la fecha actual
     const contenido = `Traspaso de información. Proyecto finalizado.
+                                                                                            Fecha: ${fechaFormateada}
 
-Usuario: ${usuario}
+Consultor S.D: ${usuario}
 
+Datos del cliente:
 Cliente: ${cliente}
-
 Número de trato: ${trato}
+Contacto: ${contacto}
+Email: ${email}
 
-El proyecto contiene:
+Módulos contratados:
 ${opcionesSeleccionadas.join("\n")}
 
-API seleccionada: ${apiSeleccionada} 
-
-${proyectoSeleccionado ? `Proyecto: ${proyectoSeleccionado}${opcionTransformacion ? ` - Versión: ${subopcionesSeleccionadas}` : ""}` : ""}
+Captura archivos?: ${opcionArchivos ? `Sí, mediante ${capturasubSeleccionada}, con frecuencia: ${frecuenciaSeleccionada}` : "No"}
 
 Comentario: ${comentario}
     `;
@@ -97,12 +84,29 @@ Comentario: ${comentario}
     document.getElementById("resultado").innerText = "Datos guardados y descargados correctamente";
 }
 
-// Mostrar/ocultar el menú de subopciones si "Transformación" es seleccionado
-document.querySelectorAll('input[name="proyecto"]').forEach(radio => {
+// Mostrar/ocultar el menú de captura si "Captura mediante" es seleccionado
+document.querySelectorAll('input[name="api"]').forEach((radio) => {
     radio.addEventListener("change", function() {
-        const opcionTransformacion = document.getElementById("opcion-transformacion").checked;
-        const menuAdicional = document.getElementById("menu-adicional");
-        menuAdicional.style.display = opcionTransformacion ? "block" : "none"; // Mostrar u ocultar
+        const menuCaptura = document.getElementById("menu-captura");
+        // Si se selecciona "Sí", mostrar el menú de captura
+        if (this.value === "Captura mediante") {
+            menuCaptura.style.display = "block";
+        } else {
+        // Si se selecciona "No", ocultar el menú de captura
+            menuCaptura.style.display = "none";
+        }
+    });
+});
+
+// Mostrar/ocultar el submenú de "Transformación" si es seleccionado
+document.querySelectorAll('input[name="proyecto"]').forEach((radio) => {
+    radio.addEventListener("change", function() {
+        const menuTransformacion = document.getElementById("menu-adicional");
+        if (document.getElementById("opcion-transformacion").checked) {
+            menuTransformacion.style.display = "block";
+        } else {
+            menuTransformacion.style.display = "none";
+        }
     });
 });
 

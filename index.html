@@ -28,15 +28,22 @@
 
                     <!-- Cliente -->
                     <label for="cliente">Cliente:</label>
-                    <input type="text" id="cliente" name="cliente" required placeholder="Ingrese el nombre del cliente">
+                    <input type="text" id="cliente" name="cliente" required placeholder="Ingrese nombre de la cuenta">
                     
                     <!-- Número de trato -->
                     <label for="trato">Número de trato:</label>
                     <input type="text" id="trato" name="trato" required placeholder="Ingrese número de trato">
 
+                    <label for="contacto">Contacto:</label>
+                    <input type="text" id="contacto" name="contacto" required placeholder="Ingrese nombre y apellido">
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Ingrese email">
+
+
                       <!-- Checkboxes -->
                       <fieldset>
-                        <legend>Contenido del proyecto:</legend>
+                        <legend>Modulos activados:</legend>
                         <div class="checkbox-container">
                         <label><input type="checkbox" name="opciones" value="SOS"> SOS</label>
                         <label><input type="checkbox" name="opciones" value="Matriz"> Matriz</label>
@@ -44,16 +51,34 @@
                         <label><input type="checkbox" name="opciones" value="LDI Plus"> LDI +</label>
                         <label><input type="checkbox" name="opciones" value="KYC"> KYC</label>
                         <label><input type="checkbox" name="opciones" value="CheckOne"> CheckOne</label>
-                        <label><input type="checkbox" name="opciones" value="Otros"> Otros</label>
+                        <label><input type="checkbox" name="opciones" value="API"> API</label>
+                        <label><input type="checkbox" name="opciones" value="OnPremise Saas"> OnPremise Saas</label>
                     </fieldset>
 
                     <!-- Contiene API -->
                     <fieldset>
-                        <legend>¿Contiene API?</legend>
+                        <legend>¿Capturan archivos?</legend>
                         <div class="checkbox-container">
-                        <label><input type="radio" name="api" value="Si contiene Api"> Sí</label>
-                        <label><input type="radio" name="api" value="No contiene API"> No</label>
+                        <label><input type="radio" name="api" value="Captura mediante" id="opcion-archivos"> Si</label>
+                        <label><input type="radio" name="api" value="No captura archivos"> No</label>
                     </fieldset>
+
+                    <!-- Menú adicional para captura de archivos -->
+                    <div id="menu-captura" style="display: none;">
+                        <label for="capturasub">Mediante:</label>
+                        <select id="capturasub" name="capturasub">
+                            <option value="SFTP">SFTP</option>
+                            <option value="API">API</option>
+                        </select>
+                    
+                        <label for="frecuencia">Frecuencia de captura:</label>
+                        <select id="frecuencia" name="frecuencia">
+                            <option value="Diario">Diario</option>
+                            <option value="Semanal">Semanal</option>
+                            <option value="Mensual">Mensual</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
 
                     <!-- Opciones implementadas -->
                     <fieldset>
@@ -61,21 +86,19 @@
                         <div class="checkbox-container">
                         <label><input type="radio" name="proyecto" value="Transformación" id="opcion-transformacion"> Transformación</label>
                         <label><input type="radio" name="proyecto" value="Implementación"> Implementación</label>
+                        <label><input type="radio" name="proyecto" value="Evolutivos Saas"> Evolutivos Saas</label>
                     </fieldset>
 
                     <!-- Menú adicional para Transformación -->
-                    <div id="menu-adicional" style="display: none; margin-top: 10px;">
-                        <label for="subopciones">Seleccione la versión:</label>
-                        <select id="subopciones" name="subopciones">
-                            <option value="BT4">BT4</option>
-                            <option value="BT3">BT3</option>
-                            <option value="ASP">ASP</option>
-                        </select>
-                    </div>
-
-                    <!-- Campo para cargar una imagen o documento 
-                    <label for="archivo">Cargar Foto o Documento:</label>
-                    <input type="file" id="archivo" name="archivo" accept="image/*, application/pdf">-->
+                    <!-- Submenú de Transformación -->
+                        <div id="menu-adicional" style="display: none;">
+                            <label for="transformacionsub">Seleccione la versión:</label>
+                            <select id="transformacionsub" name="transformacionsub">
+                                <option value="BT4">BT4</option>
+                                <option value="BT3">BT3</option>
+                                <option value="ASP">ASP</option>
+                            </select>
+                        </div>
 
                     <!-- Comentarios -->
                     <label for="comentario">Comentarios:</label>
@@ -92,7 +115,6 @@
     </section>
 
      <script src="script.js"></script>
-   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>-->
 
 </body>
 </html>

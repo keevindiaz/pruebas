@@ -44,6 +44,27 @@ input[type="text"]:focus, select:focus, textarea:focus {
     outline: none;
 }
 
+/* Estilos generales para los campos de entrada */
+input[type="email"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.3s, background-color 0.3s;
+    margin-bottom: 10px;
+}
+
+/* Estilo al enfocar los campos de entrada */
+input[type="email"]:focus, select:focus, textarea:focus {
+    border-color: #007bff;
+    background-color: #eaf4ff;
+    outline: none;
+}
+
 /* Estilo para las etiquetas */
 label {
     font-size: 16px;
@@ -63,7 +84,7 @@ button {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
     margin-top: 10px;
 }
 
@@ -114,4 +135,8 @@ fieldset {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
+}
+
+input:invalid, textarea:invalid {
+    border-color: #ff0000;
 }
