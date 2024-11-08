@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasaje de Información</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+
+    <section>
+        <div class="form-container-wrapper">
+            <img src="logo.png" alt="Logo" class="logo">
+            <div class="form-container">
+
+                <form id="miFormulario">
+                    
+                    <!-- Usuario -->
+                    <label for="usuario">Usuario responsable:</label>
+                    <select id="usuario" name="usuario" required>
+                        <option value="" disabled selected>Selecciona el usuario</option>
+                        <option value="Kevin Diaz">Kevin Diaz</option>
+                        <option value="Juan Fernando Quinteros">Juan Fernando Quinteros</option>
+                        <option value="Marcelo Gallardo">Marcelo Gallardo</option>
+                        <option value="Oso Prato">Oso Prato</option>
+                    </select>
+
+                    <!-- Cliente -->
+                    <label for="cliente">Cliente:</label>
+                    <input type="text" id="cliente" name="cliente" required placeholder="Ingrese el nombre del cliente">
+                    
+                    <!-- Número de trato -->
+                    <label for="trato">Número de trato:</label>
+                    <input type="text" id="trato" name="trato" required placeholder="Ingrese número de trato">
+
+                      <!-- Checkboxes -->
+                      <fieldset>
+                        <legend>Contenido del proyecto:</legend>
+                        <div class="checkbox-container">
+                        <label><input type="checkbox" name="opciones" value="SOS"> SOS</label>
+                        <label><input type="checkbox" name="opciones" value="Matriz"> Matriz</label>
+                        <label><input type="checkbox" name="opciones" value="LDI"> LDI</label>
+                        <label><input type="checkbox" name="opciones" value="LDI Plus"> LDI +</label>
+                        <label><input type="checkbox" name="opciones" value="KYC"> KYC</label>
+                        <label><input type="checkbox" name="opciones" value="CheckOne"> CheckOne</label>
+                        <label><input type="checkbox" name="opciones" value="Otros"> Otros</label>
+                    </fieldset>
+
+                    <!-- Contiene API -->
+                    <fieldset>
+                        <legend>¿Contiene API?</legend>
+                        <div class="checkbox-container">
+                        <label><input type="radio" name="api" value="Si contiene Api"> Sí</label>
+                        <label><input type="radio" name="api" value="No contiene API"> No</label>
+                    </fieldset>
+
+                    <!-- Opciones implementadas -->
+                    <fieldset>
+                        <legend>El proyecto es:</legend>
+                        <div class="checkbox-container">
+                        <label><input type="radio" name="proyecto" value="Transformación" id="opcion-transformacion"> Transformación</label>
+                        <label><input type="radio" name="proyecto" value="Implementación"> Implementación</label>
+                    </fieldset>
+
+                    <!-- Menú adicional para Transformación -->
+                    <div id="menu-adicional" style="display: none; margin-top: 10px;">
+                        <label for="subopciones">Seleccione la versión:</label>
+                        <select id="subopciones" name="subopciones">
+                            <option value="BT4">BT4</option>
+                            <option value="BT3">BT3</option>
+                            <option value="ASP">ASP</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo para cargar una imagen o documento 
+                    <label for="archivo">Cargar Foto o Documento:</label>
+                    <input type="file" id="archivo" name="archivo" accept="image/*, application/pdf">-->
+
+                    <!-- Comentarios -->
+                    <label for="comentario">Comentarios:</label>
+                    <textarea id="comentario" name="comentario" placeholder="Proyecto cerrado correctamente. Sin pendientes"></textarea>
+
+                    <!-- Botón de guardado -->
+                    <button type="submit">Guardar y Descargar</button>
+
+                </form>
+                
+                <p id="resultado"></p>
+            </div>
+        </div>
+    </section>
+
+     <script src="script.js"></script>
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>-->
+
+</body>
+</html>
